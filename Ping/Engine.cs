@@ -75,5 +75,10 @@ namespace Ping
         {
             _host.Log(text);
         }
+
+        public void Chart(double value, DateTime? date=null)
+        {
+            _host.Chart.ChartValues.Add(new MeasureModel() {Value = value, DateTime = date ?? DateTime.Now});
+        }
     }    
 }
