@@ -5,10 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ping"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" ResizeMode="NoResize">
+        Title="MainWindow" Height="350" Width="525" ResizeMode="NoResize" Closing="WindowClosing">
 
     <Grid>
-        <TextBox x:Name="textBox" TextWrapping="Wrap" IsReadOnly="True" Cursor="Arrow" Width="517" Margin="0,217,0,2" />
-        
+
+        <Menu x:Name="menu" HorizontalAlignment="Right" Height="311" VerticalAlignment="Top" Width="499" Margin="0,0,10,0">
+            <MenuItem Header="File" Margin="0">
+                <MenuItem Header="Preferences" Width="100" Click="ClickMenuPreferences"/>
+            </MenuItem>
+            <TextBox x:Name="textBox" TextWrapping="Wrap" IsReadOnly="True" Cursor="Arrow" Width="517" Margin="0,217,0,2" />
+        </Menu>
+
     </Grid>
 </Window>
