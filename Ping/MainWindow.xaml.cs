@@ -38,12 +38,17 @@ namespace Ping
             {
                 return _operations.ToArray();
             }
+            set
+            {                       
+                _operations.AddRange(value);
+            }
         }
 
         public MainWindow()
         {
             InitializeComponent();
-            _operations.Add(new PingOperation("8.8.8.8", new TimeSpan(0, 0, 1)));
+            _operations.Add(new PingOperation("8.8.8.8", new TimeSpan(0, 0, 5)));
+            _operations.Add(new PingOperation("8.8.4.4", new TimeSpan(0, 0, 5)));
             _engine = new Engine(this);
             _engine.Run();
 
@@ -57,7 +62,7 @@ namespace Ping
 
         private void ClickMenuPreferences(object sender, RoutedEventArgs e)
         {
-            Ping.Preferences _prefWindow = new Preferences();
+            Ping.Preferences _prefWindow = new Preferences(this);
             _prefWindow.Show();
         }
 

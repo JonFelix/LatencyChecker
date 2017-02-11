@@ -34,7 +34,7 @@ namespace Ping
             int timeout = 120;
             PingReply reply = pingSender.Send(ip, timeout, buffer, options);
             _host.Log("Pinging " + reply.Address + ": " + reply.Status + "("+ reply.RoundtripTime + "ms)");
-            _host.Chart(value: Convert.ToDouble(reply.RoundtripTime)); 
+             
             return reply;
         }
 
