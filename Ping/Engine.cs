@@ -53,7 +53,7 @@ namespace Ping
                         PingReply _reply = _ping.SendPing(_host.Operations[i].IP);
                         _host.Operations[i].ResponseMessage[_host.Operations[i].Cursor] = _reply.Status.ToString();
                         _host.Operations[i].ResponseTime[_host.Operations[i].Cursor] = _reply.RoundtripTime;
-                        
+                        _host.Operations[i].ResponseTimestamp[_host.Operations[i].Cursor] = DateTime.Now;
                     }
                 }
             }    
