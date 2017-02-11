@@ -19,9 +19,18 @@ namespace Ping
     /// </summary>
     public partial class Preferences : Window
     {
-        public Preferences()
+        MainWindow _host;
+
+        public Preferences(MainWindow host)
         {
+            _host = host;
             InitializeComponent();
+            for(int i = 0; i < _host.Operations.Length; i++)
+            {
+                ListViewItem _lvi = new ListViewItem();
+                listView.Items.Add(_lvi);
+                   
+            }
         }
     }
 }

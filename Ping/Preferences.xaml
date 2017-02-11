@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="Preferences" Height="300" Width="300">
     <Grid>
-        
+        <ListView x:Name="listView">
+            <ListView.View>
+                <GridView/>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>

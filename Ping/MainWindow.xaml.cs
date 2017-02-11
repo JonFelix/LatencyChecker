@@ -30,6 +30,10 @@ namespace Ping
             {
                 return _operations.ToArray();
             }
+            set
+            {                       
+                _operations.AddRange(value);
+            }
         }
 
         public MainWindow()
@@ -59,7 +63,7 @@ namespace Ping
 
         private void ClickMenuPreferences(object sender, RoutedEventArgs e)
         {
-            Ping.Preferences _prefWindow = new Preferences();
+            Ping.Preferences _prefWindow = new Preferences(this);
             _prefWindow.Show();
         }
 
