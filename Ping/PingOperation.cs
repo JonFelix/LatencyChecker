@@ -12,6 +12,7 @@ namespace Ping
         public long[] ResponseTime = new long[1000];
         public TimeSpan Interval;
         public string[] ResponseMessage = new string[1000];
+        public DateTime[] ResponseTimestamp = new DateTime[1000];
         public DateTime LastOperationTime;
         public int Cursor = -1;
 
@@ -27,6 +28,7 @@ namespace Ping
             {
                 ResponseMessage[i - 1] = ResponseMessage[i];
                 ResponseTime[i - 1] = ResponseTime[i];
+                ResponseTimestamp[i - 1] = ResponseTimestamp[i];
             }
         }
     }

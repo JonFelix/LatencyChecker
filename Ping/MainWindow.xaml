@@ -6,9 +6,18 @@
         xmlns:local="clr-namespace:Ping"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525" ResizeMode="NoResize" Closing="WindowClosing">
         Title="MainWindow" Height="350" Width="525">
 
     <Grid>
+
+        <Menu x:Name="menu" HorizontalAlignment="Right" Height="311" VerticalAlignment="Top" Width="499" Margin="0,0,10,0">
+            <MenuItem Header="File" Margin="0">
+                <MenuItem Header="Preferences" Width="100" Click="ClickMenuPreferences"/>
+            </MenuItem>
+            <TextBox x:Name="textBox" TextWrapping="Wrap" IsReadOnly="True" Cursor="Arrow" Width="517" Margin="0,217,0,2" />
+        </Menu>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>

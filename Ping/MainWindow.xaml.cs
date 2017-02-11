@@ -21,6 +21,7 @@ namespace Ping
     public partial class MainWindow : Window
     {
         List<PingOperation> _operations = new List<PingOperation>();
+        Engine _engine;
 
         public static readonly DependencyProperty PingListProperty = DependencyProperty.Register(
             "PingList", typeof(string), typeof(MainWindow), new PropertyMetadata(default(string)));
@@ -43,7 +44,9 @@ namespace Ping
         {
             InitializeComponent();
             _operations.Add(new PingOperation("8.8.8.8", new TimeSpan(0, 0, 1)));
-            (new Engine(this)).Run();
+            _engine = new Engine(this);
+            _engine.Run();
+
             
         }
         
@@ -51,5 +54,17 @@ namespace Ping
         {
             PingList += PingList!=null? Environment.NewLine + text :text;
         }
+
+        private void ClickMenuPreferences(object sender, RoutedEventArgs e)
+        {
+            Ping.Preferences _prefWindow = new Preferences();
+            _prefWindow.Show();
+        }
+
+        private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            _engine.IsRunning = false;   
+        }
+
     }
 }

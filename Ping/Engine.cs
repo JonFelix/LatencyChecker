@@ -10,6 +10,19 @@ namespace Ping
     {
         MainWindow _host;      
         BackgroundWorker _worker = new BackgroundWorker();
+        bool _isRunning = true;
+
+        public bool IsRunning
+        {
+            get
+            {
+                return _isRunning;
+            }
+            set
+            {
+                _isRunning = value;
+            }
+        }
 
 
         public Engine(MainWindow host)
@@ -30,7 +43,6 @@ namespace Ping
             DateTime _startTime = DateTime.Now;
             DateTime _lastTime = _startTime;
             TimeSpan _interval = new TimeSpan(0, 0, 1);
-            bool _isRunning = true; 
             while(_isRunning)
             {
                 if((DateTime.Now - _lastTime) < _interval)
@@ -53,7 +65,7 @@ namespace Ping
                         PingReply _reply = _ping.SendPing(_host.Operations[i].IP);
                         _host.Operations[i].ResponseMessage[_host.Operations[i].Cursor] = _reply.Status.ToString();
                         _host.Operations[i].ResponseTime[_host.Operations[i].Cursor] = _reply.RoundtripTime;
-                        
+                        _host.Operations[i].ResponseTimestamp[_host.Operations[i].Cursor] = DateTime.Now;
                     }
                 }
             }    
