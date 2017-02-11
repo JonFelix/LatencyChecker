@@ -6,30 +6,31 @@
         xmlns:local="clr-namespace:Ping"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" ResizeMode="NoResize" Closing="WindowClosing">
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="525"  Closing="WindowClosing">
 
     <Grid>
 
-        <Menu x:Name="menu" HorizontalAlignment="Right" Height="311" VerticalAlignment="Top" Width="499" Margin="0,0,10,0">
-            <MenuItem Header="File" Margin="0">
-                <MenuItem Header="Preferences" Width="100" Click="ClickMenuPreferences"/>
-            </MenuItem>
-            <TextBox x:Name="textBox" TextWrapping="Wrap" IsReadOnly="True" Cursor="Arrow" Width="517" Margin="0,217,0,2" />
-        </Menu>
+
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
             <RowDefinition Height="2*" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
-        </Grid.RowDefinitions>     
-        <local:ConstantChangesChart x:Name="Chart"/>
-        <Separator Grid.Row="1" />
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True" Grid.Row="2">
-            <TextBox BorderBrush="transparent" Text="{Binding PingList, ElementName=window}" />
-        </ScrollViewer>  
+        </Grid.RowDefinitions>
+
+        <Menu x:Name="menu" VerticalAlignment="Top">
+            <MenuItem Header="File" Margin="0">
+                <MenuItem Header="Preferences" Width="100" Click="ClickMenuPreferences"/>
+            </MenuItem>
+        </Menu>
+        <local:ConstantChangesChart x:Name="Chart" Grid.Row="1"/>
+        <Separator Grid.Row="2" />
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True" Grid.Row="3">
+            <TextBox BorderBrush="transparent" Text="{Binding PingList, ElementName=window}" Cursor="Arrow" TextWrapping="Wrap" />
+        </ScrollViewer>
     </Grid>
 </Window>
