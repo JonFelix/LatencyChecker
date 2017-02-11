@@ -23,6 +23,14 @@ namespace Ping
         List<PingOperation> _operations = new List<PingOperation>();
         Engine _engine;
 
+        public static readonly DependencyProperty PingListProperty = DependencyProperty.Register(
+            "PingList", typeof(string), typeof(MainWindow), new PropertyMetadata(default(string)));
+
+        public string PingList
+        {
+            get { return Dispatcher.Invoke(() => (string)GetValue(PingListProperty)) ; }
+            set { Dispatcher.BeginInvoke((Action)(()=>SetValue(PingListProperty, value))) ; }
+        }
 
         public PingOperation[] Operations
         {
@@ -44,21 +52,11 @@ namespace Ping
             _engine.Run();
 
             
-        }   
-
-
+        }
         
         public void Log(string text)
-        {         
-            this.Dispatcher.Invoke((Action)(() =>
-            {
-                if(textBox.Text.Length > 0)
-                {
-                    text = "\t\n" + text;
-                }
-                textBox.AppendText(text);  
-            }));
-            
+        {
+            PingList += PingList!=null? Environment.NewLine + text :text;
         }
 
         private void ClickMenuPreferences(object sender, RoutedEventArgs e)
