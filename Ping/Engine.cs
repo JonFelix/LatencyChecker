@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Net.NetworkInformation;
 using System.Threading;
+using System.Windows.Controls;
 
 namespace Ping
 {
@@ -66,6 +68,7 @@ namespace Ping
                         _host.Operations[i].ResponseMessage[_host.Operations[i].Cursor] = _reply.Status.ToString();
                         _host.Operations[i].ResponseTime[_host.Operations[i].Cursor] = _reply.RoundtripTime;
                         _host.Operations[i].ResponseTimestamp[_host.Operations[i].Cursor] = DateTime.Now;
+                        Chart(value: Convert.ToDouble(_host.Operations[i].ResponseTime[_host.Operations[i].Cursor]), index: i);
                     }
                 }
             }    
@@ -76,9 +79,14 @@ namespace Ping
             _host.Log(text);
         }
 
-        public void Chart(double value, DateTime? date=null)
+        public void Chart(double value, int index, DateTime? date=null)
         {
-            _host.Chart.ChartValues.Add(new MeasureModel() {Value = value, DateTime = date ?? DateTime.Now});
+            if(index >= _host.Chart.ChartValues.Count)
+            {
+                _host.Chart.ChartValues.Add(new LiveCharts.ChartValues<MeasureModel>());
+               
+            }
+            _host.Chart.ChartValues[index].Add(new MeasureModel() {Value = value, Series = index, DateTime = date ?? DateTime.Now});
         }
     }    
 }

@@ -18,18 +18,17 @@
             </Button>-->
             <lvc:CartesianChart Grid.Row="1">
                 <lvc:CartesianChart.Series>
-                    <lvc:LineSeries Values="{Binding ChartValues}" PointGeometrySize="18" StrokeThickness="4" />
+                    <lvc:LineSeries Values="{Binding ChartValues[0]}" PointGeometrySize="18" StrokeThickness="4" />
+                    <lvc:LineSeries Values="{Binding ChartValues[1]}" PointGeometrySize="18" StrokeThickness="4" />
                 </lvc:CartesianChart.Series>
                 <lvc:CartesianChart.AxisX>
-                    <lvc:Axis LabelFormatter="{Binding DateTimeFormatter}" 
+                <lvc:Axis LabelFormatter="{Binding DateTimeFormatter}" 
                               MaxValue="{Binding AxisMax}" 
                               MinValue="{Binding AxisMin}"
-                              DisableAnimations="True">
-                        <lvc:Axis.Separator>
-                            <lvc:Separator Step="{Binding AxisStep}"></lvc:Separator>
-                        </lvc:Axis.Separator>
-                    </lvc:Axis>
-                </lvc:CartesianChart.AxisX>
+                              DisableAnimations="False">
+
+                </lvc:Axis>
+            </lvc:CartesianChart.AxisX>
             </lvc:CartesianChart>
         </Grid>
     </UserControl>

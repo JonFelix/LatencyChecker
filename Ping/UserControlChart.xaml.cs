@@ -27,6 +27,20 @@ namespace Ping
         private double _axisMax;
         private double _axisMin;
 
+        public List<ChartValues<MeasureModel>> ChartValues
+        {
+            get; set;
+        }
+        public Func<double, string> DateTimeFormatter
+        {
+            get; set;
+        }
+
+        public double AxisStep
+        {
+            get; set;
+        }
+
         public ConstantChangesChart()
         {
             InitializeComponent();
@@ -47,10 +61,11 @@ namespace Ping
 
             //lets save the mapper globally.
             Charting.For<MeasureModel>(mapper);
+            
 
 
             //the values property will store our values array
-            ChartValues = new ChartValues<MeasureModel>();
+            ChartValues = new List<ChartValues<MeasureModel>>();
 
             //lets set how to display the X Labels
             DateTimeFormatter = value => new DateTime((long)value).ToString("mm:ss");
@@ -73,10 +88,7 @@ namespace Ping
             IsDataInjectionRunning = true;
         }
 
-        public ChartValues<MeasureModel> ChartValues { get; set; }
-        public Func<double, string> DateTimeFormatter { get; set; }
-
-        public double AxisStep { get; set; }
+        
 
         public double AxisMax
         {
@@ -128,13 +140,17 @@ namespace Ping
             SetAxisLimits(now);
 
             //lets only use the last 30 values
-            if (ChartValues.Count > 30) ChartValues.RemoveAt(0);
+            if(ChartValues.Count > 30000)
+            {
+                ChartValues.RemoveAt(0);
+            }
+            
         }
 
         private void SetAxisLimits(DateTime now)
         {
-            AxisMax = now.Ticks + TimeSpan.FromSeconds(1).Ticks; // lets force the axis to be 100ms ahead
-            AxisMin = now.Ticks - TimeSpan.FromSeconds(8).Ticks; //we only care about the last 8 seconds
+            AxisMax = now.Ticks + TimeSpan.FromSeconds(0).Ticks; // lets force the axis to be 100ms ahead
+            AxisMin = now.Ticks - TimeSpan.FromMinutes(5).Ticks; //we only care about the last 8 seconds
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
