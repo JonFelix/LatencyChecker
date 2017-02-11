@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using LiveCharts;
 using LiveCharts.Configurations;
+using LiveCharts.Wpf;
 
 namespace Ping
 {
@@ -101,6 +102,11 @@ namespace Ping
         public bool IsDataInjectionRunning { get; set; }
         public Random R { get; set; }
 
+        public void AddSerie(CandleSeries series)
+        {
+            ChartCartesianChart.Series.Add(series);
+        }
+
         private void RunDataOnClick(object sender, RoutedEventArgs e)
         {
             if (IsDataInjectionRunning)
@@ -128,13 +134,13 @@ namespace Ping
             SetAxisLimits(now);
 
             //lets only use the last 30 values
-            if (ChartValues.Count > 30) ChartValues.RemoveAt(0);
+            if (ChartValues.Count > 50) ChartValues.RemoveAt(0);
         }
 
         private void SetAxisLimits(DateTime now)
         {
             AxisMax = now.Ticks + TimeSpan.FromSeconds(1).Ticks; // lets force the axis to be 100ms ahead
-            AxisMin = now.Ticks - TimeSpan.FromSeconds(8).Ticks; //we only care about the last 8 seconds
+            AxisMin = now.Ticks - TimeSpan.FromSeconds(60*5).Ticks; //we only care about the last 8 seconds
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -16,8 +16,8 @@
             <!--<Button Grid.Row="0"  Click="RunDataOnClick">  
                 Inject/Stop Data
             </Button>-->
-            <lvc:CartesianChart Grid.Row="1">
-                <lvc:CartesianChart.Series>
+            <lvc:CartesianChart Grid.Row="1" x:Name="ChartCartesianChart">
+                <lvc:CartesianChart.Series >
                     <lvc:LineSeries Values="{Binding ChartValues}" PointGeometrySize="18" StrokeThickness="4" />
                 </lvc:CartesianChart.Series>
                 <lvc:CartesianChart.AxisX>
