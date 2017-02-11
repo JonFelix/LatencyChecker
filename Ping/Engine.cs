@@ -5,6 +5,7 @@ using System.IO;
 using System.Net.NetworkInformation;
 using System.Threading;
 using System.Windows.Controls;
+using LiveCharts.Wpf;
 
 namespace Ping
 {
@@ -87,6 +88,11 @@ namespace Ping
                
             }
             _host.Chart.ChartValues[index].Add(new MeasureModel() {Value = value, Series = index, DateTime = date ?? DateTime.Now});
+        }
+
+        public void AddSerie(CandleSeries series)
+        {
+            _host.Chart.AddSerie(series);
         }
     }    
 }

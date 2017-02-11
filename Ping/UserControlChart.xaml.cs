@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using LiveCharts;
 using LiveCharts.Configurations;
+using LiveCharts.Wpf;
 
 namespace Ping
 {
@@ -112,6 +113,11 @@ namespace Ping
         public DispatcherTimer Timer { get; set; }
         public bool IsDataInjectionRunning { get; set; }
         public Random R { get; set; }
+
+        public void AddSerie(CandleSeries series)
+        {
+            ChartCartesianChart.Series.Add(series);
+        }
 
         private void RunDataOnClick(object sender, RoutedEventArgs e)
         {
