@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Ping"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" ResizeMode="NoResize">
+        Title="MainWindow" Height="350" Width="525">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -14,10 +14,13 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True" Grid.Row="1">
+        </Grid.RowDefinitions>     
+        <local:ConstantChangesChart x:Name="Chart"/>
+        <Separator Grid.Row="1" />
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True" Grid.Row="2">
             <TextBox BorderBrush="transparent" Text="{Binding PingList, ElementName=window}" />
-        </ScrollViewer>
+        </ScrollViewer>  
     </Grid>
 </Window>

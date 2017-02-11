@@ -45,9 +45,7 @@ namespace Ping
             _operations.Add(new PingOperation("8.8.8.8", new TimeSpan(0, 0, 1)));
             (new Engine(this)).Run();
             
-        }   
-
-
+        }
         
         public void Log(string text)
         {
