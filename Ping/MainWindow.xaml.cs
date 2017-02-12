@@ -132,9 +132,7 @@ namespace Ping
 
         private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            e.Cancel = true;
-            Hide();
-            //_engine.IsRunning = false;   
+            _engine.IsRunning = false;   
         }
 
     }
