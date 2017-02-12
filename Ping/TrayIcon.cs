@@ -1,6 +1,4 @@
-﻿using System;
-using WinForms = System.Windows.Forms;
-using System.Drawing;
+﻿using WinForms = System.Windows.Forms;
 
 namespace Ping
 {
@@ -9,15 +7,18 @@ namespace Ping
         WinForms.NotifyIcon _icon;
         public TrayIcon()
         {
-            _icon = new WinForms.NotifyIcon();
-            _icon.Icon = new System.Drawing.Icon("icon.ico");
-            _icon.Visible = true;
-           /* _icon.DoubleClick +=
-                delegate (object sender, EventArgs args)
-                {
-                    this.Show();
-                    this.WindowState = WindowState.Normal;
-                };*/
+            _icon = new WinForms.NotifyIcon
+            {
+                Icon = Properties.Resources.Icon1,
+                Visible = true
+            };
+
+            /* _icon.DoubleClick +=
+     delegate (object sender, EventArgs args)
+     {
+         this.Show();
+         this.WindowState = WindowState.Normal;
+     };*/
         }
     }
 }
