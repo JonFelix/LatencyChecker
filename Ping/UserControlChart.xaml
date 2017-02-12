@@ -20,11 +20,11 @@
             <!--<lvc:CartesianChart.Series >
                 <lvc:LineSeries PointGeometrySize="18" StrokeThickness="4" />
             </lvc:CartesianChart.Series>-->
-            <lvc:CartesianChart.AxisX>
+            <lvc:CartesianChart.AxisX >
                 <lvc:Axis LabelFormatter="{Binding DateTimeFormatter}" 
                               MaxValue="{Binding AxisMax}" 
                               MinValue="{Binding AxisMin}"
-                              DisableAnimations="False">
+                              DisableAnimations="False" IsMerged="True">
 
                 </lvc:Axis>
             </lvc:CartesianChart.AxisX>

@@ -67,7 +67,7 @@ namespace Ping
 
 
             //the values property will store our values array
-            ChartValues = new List<ChartValues<MeasureModel>>();
+           ChartValues = new List<ChartValues<MeasureModel>>();
 
             //lets set how to display the X Labels
             DateTimeFormatter = value => new DateTime((long)value).ToString("mm:ss");
@@ -121,7 +121,8 @@ namespace Ping
             {
                 ChartCartesianChart.Series.Add(new LineSeries()
                 {
-                    Values = new ChartValues<MeasureModel>()
+                    Values = new ChartValues<MeasureModel>(),
+                    Fill = Brushes.Transparent
                 });
             }));
 
@@ -144,25 +145,17 @@ namespace Ping
         private void TimerOnTick(object sender, EventArgs eventArgs)
         {
             var now = DateTime.Now;
-
-            //ChartValues.Add(new MeasureModel
-            //{
-            //    DateTime = now,
-            //    Value = R.Next(0, 10)
-            //});
-
+                                                  
             SetAxisLimits(now);
 
-            //lets only use the last 30 values
-            if (ChartCartesianChart.Series.Count>0 &&
-                ChartCartesianChart.Series[ChartCartesianChart.Series.Count-1].Values?.Count > 50)
+            for (var i = 0; i < ChartValues?.Count; i++)
             {
-                foreach (ISeriesView serie in ChartCartesianChart.Series)
-                {
-                    serie.Values.RemoveAt(0);
-                }
+                ChartCartesianChart.Series[i].Values.AddRange(ChartValues[i]);
+                ChartValues[i].Clear();
 
-            }
+                if (ChartCartesianChart.Series[i].Values.Count > 50)
+                    ChartCartesianChart.Series[i].Values.RemoveAt(0);
+            }       
 
         }
 
@@ -182,14 +175,9 @@ namespace Ping
 
         public void UpdateSerie(int index, MeasureModel measureModel)
         {
-            Dispatcher.BeginInvoke((Action)(() =>
-           {
-
-               ChartCartesianChart.Series[index].Values = ChartCartesianChart.Series[index].Values ?? new ChartValues<MeasureModel>();
-               ChartCartesianChart.Series[index].Values.Add(measureModel);
-
-           }));
-
+            if (ChartValues.Count==index)
+                ChartValues.Add(new ChartValues<MeasureModel>());
+            ChartValues[index].Add(measureModel ?? new MeasureModel());
         }
     }
 }

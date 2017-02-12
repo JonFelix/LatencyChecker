@@ -81,12 +81,12 @@ namespace Ping
 
         public void Chart(double value, int index, DateTime? date=null)
         {
-            if(index >= _host.Chart.ChartValues.Count)
+            if (_host.Chart.ChartValues==null||index >= _host.Chart.ChartValues.Count)
             {
-                _host.Chart.ChartValues.Add(null);
+                //_host.Chart.ChartValues.Add(null);
                 _host.Chart.AddSerie(index);
             }
-            _host.Chart.UpdateSerie(index, new MeasureModel() {Value = value, Series = index, DateTime = date ?? DateTime.Now});
+            _host.Chart.UpdateSerie(index, new MeasureModel() { Value = value == 0 ? double.NaN:value, Series = index, DateTime = date ?? DateTime.Now});
         }
                               
     }    
