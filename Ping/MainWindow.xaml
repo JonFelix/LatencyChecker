@@ -1,4 +1,4 @@
-﻿<Window x:Name="window" x:Class="Ping.MainWindow"
+﻿<Window x:Name="Window" x:Class="Ping.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -22,7 +22,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Menu x:Name="menu" VerticalAlignment="Top">
+        <Menu x:Name="Menu" VerticalAlignment="Top">
             <MenuItem Header="File" Margin="0">
                 <MenuItem Header="Preferences" Width="100" Click="ClickMenuPreferences"/>
             </MenuItem>
@@ -30,7 +30,7 @@
         <local:ConstantChangesChart x:Name="Chart" Grid.Row="1"/>
         <Separator Grid.Row="2" />
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True" Grid.Row="3">
-            <TextBox BorderBrush="transparent" Text="{Binding PingList, ElementName=window}" Cursor="Arrow" TextWrapping="Wrap" />
+            <TextBox BorderBrush="transparent" Text="{Binding PingList, ElementName=Window}" Cursor="Arrow" TextWrapping="Wrap" />
         </ScrollViewer>
     </Grid>
 </Window>

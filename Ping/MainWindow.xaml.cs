@@ -7,10 +7,10 @@ namespace Ping
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
-        List<PingOperation> _operations = new List<PingOperation>();
-        Engine _engine;
+        private readonly List<PingOperation> _operations = new List<PingOperation>();
+        private readonly Engine _engine;
 
         public static readonly DependencyProperty PingListProperty = DependencyProperty.Register(
             "PingList", typeof(string), typeof(MainWindow), new PropertyMetadata(default(string)));
@@ -85,8 +85,8 @@ namespace Ping
 
         private void ClickMenuPreferences(object sender, RoutedEventArgs e)
         {
-            Ping.Preferences _prefWindow = new Preferences(this);
-            _prefWindow.Show();
+            var prefWindow = new Preferences(this);
+            prefWindow.Show();
         }
 
         private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)

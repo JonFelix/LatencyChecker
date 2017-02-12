@@ -10,8 +10,8 @@
                  d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance ping:ConstantChangesChart}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <!--<Button Grid.Row="0"  Click="RunDataOnClick">  
                 Inject/Stop Data
@@ -24,9 +24,7 @@
                 <lvc:Axis LabelFormatter="{Binding DateTimeFormatter}" 
                               MaxValue="{Binding AxisMax}" 
                               MinValue="{Binding AxisMin}"
-                              DisableAnimations="False" IsMerged="True">
-
-                </lvc:Axis>
+                              DisableAnimations="False" IsMerged="True" />
             </lvc:CartesianChart.AxisX>
         </lvc:CartesianChart>
     </Grid>
