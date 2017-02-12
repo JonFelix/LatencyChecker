@@ -47,7 +47,7 @@ namespace Ping
                     continue;
                 }
                 lastTime = DateTime.Now;
-
+                string _trayText = "";
                 for(var i = 0; i < _host.Operations.Length; i++)
                 {
                     if(_host.Operations[i].LastOperationTime + _host.Operations[i].Interval < DateTime.Now)
@@ -65,7 +65,14 @@ namespace Ping
                         _host.Operations[i].ResponseTimestamp[_host.Operations[i].Cursor] = DateTime.Now;
                         Chart(Convert.ToDouble(_host.Operations[i].ResponseTime[_host.Operations[i].Cursor]), i, _host.Operations[i].HostName, lastTime);
                     }
+                    _trayText += _host.Operations[i].HostName + " " + _host.Operations[i].ResponseTime[_host.Operations[i].Cursor].ToString() + "ms";
+                    if(i < _host.Operations.Length)
+                    {
+                        _trayText += Environment.NewLine;
+                    }
                 }
+                _host.TrayIcon.Text = _trayText;
+                _host.UpdateInfo(_trayText);
             }    
         }
 
