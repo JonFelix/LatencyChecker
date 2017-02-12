@@ -71,7 +71,7 @@ namespace Ping
                         _trayText += Environment.NewLine;
                     }
                 }
-                _host.TrayIcon.Text = _trayText;
+                _host.TrayIcon.Text = _trayText.Length > 64 ? _trayText.Substring(0, 60) + "..." : _trayText;
                 _host.UpdateInfo(_trayText);
             }    
         }

@@ -78,7 +78,7 @@ namespace Ping
             _operations.Add(new PingOperation("Secondary Google DNS", "8.8.4.4", new TimeSpan(0, 0, 5)));
 
             //OpenDns
-            /*_operations.Add(new PingOperation("Primary OpenDNS DNS", "208.67.222.222", new TimeSpan(0, 0, 5))); 
+            _operations.Add(new PingOperation("Primary OpenDNS DNS", "208.67.222.222", new TimeSpan(0, 0, 5))); 
             _operations.Add(new PingOperation("Secondary OpenDNS DNS", "208.67.220.220", new TimeSpan(0, 0, 5)));
 
             //OpenNIC 
@@ -96,7 +96,7 @@ namespace Ping
 
             //Comodo Secure DNS
             _operations.Add(new PingOperation("Primary Comodo Secure DNS", "8.26.56.26", new TimeSpan(0, 0, 5)));
-            _operations.Add(new PingOperation("Secondary Comodo Secure DNS", "8.20.247.20", new TimeSpan(0, 0, 5))); */   
+            _operations.Add(new PingOperation("Secondary Comodo Secure DNS", "8.20.247.20", new TimeSpan(0, 0, 5)));  
 
             //need more? http://public-dns.info/nameserver/se.html
             
