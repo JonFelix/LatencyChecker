@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using LiveCharts;
 using LiveCharts.Configurations;
+using LiveCharts.Definitions.Series;
 using LiveCharts.Wpf;
 
 namespace Ping
@@ -62,7 +63,7 @@ namespace Ping
 
             //lets save the mapper globally.
             Charting.For<MeasureModel>(mapper);
-            
+
 
 
             //the values property will store our values array
@@ -89,7 +90,7 @@ namespace Ping
             IsDataInjectionRunning = true;
         }
 
-        
+
 
         public double AxisMax
         {
@@ -114,9 +115,16 @@ namespace Ping
         public bool IsDataInjectionRunning { get; set; }
         public Random R { get; set; }
 
-        public void AddSerie(CandleSeries series)
+        public void AddSerie(int index, object options = null)
         {
-            ChartCartesianChart.Series.Add(series);
+            Dispatcher.BeginInvoke((Action)(() =>
+            {
+                ChartCartesianChart.Series.Add(new LineSeries()
+                {
+                    Values = new ChartValues<MeasureModel>()
+                });
+            }));
+
         }
 
         private void RunDataOnClick(object sender, RoutedEventArgs e)
@@ -146,11 +154,16 @@ namespace Ping
             SetAxisLimits(now);
 
             //lets only use the last 30 values
-            if(ChartValues.Count > 30000)
+            if (ChartCartesianChart.Series.Count>0 &&
+                ChartCartesianChart.Series[ChartCartesianChart.Series.Count-1].Values?.Count > 50)
             {
-                ChartValues.RemoveAt(0);
+                foreach (ISeriesView serie in ChartCartesianChart.Series)
+                {
+                    serie.Values.RemoveAt(0);
+                }
+
             }
-            
+
         }
 
         private void SetAxisLimits(DateTime now)
@@ -165,6 +178,18 @@ namespace Ping
         {
             if (PropertyChanged != null)
                 PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public void UpdateSerie(int index, MeasureModel measureModel)
+        {
+            Dispatcher.BeginInvoke((Action)(() =>
+           {
+
+               ChartCartesianChart.Series[index].Values = ChartCartesianChart.Series[index].Values ?? new ChartValues<MeasureModel>();
+               ChartCartesianChart.Series[index].Values.Add(measureModel);
+
+           }));
+
         }
     }
 }
