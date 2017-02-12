@@ -43,7 +43,7 @@ namespace Ping
         public MainWindow()
         {
             InitializeComponent();
-            _icon = new TrayIcon();
+            _icon = new TrayIcon(this);
             
 
             //Google
@@ -100,7 +100,9 @@ namespace Ping
 
         private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            _engine.IsRunning = false;   
+            e.Cancel = true;
+            Hide();
+            //_engine.IsRunning = false;   
         }
 
     }
