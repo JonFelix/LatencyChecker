@@ -4,7 +4,7 @@ namespace Ping
 {
     public class PingOperation
     {
-        public readonly string Ip;
+        public string Ip;
         public readonly long[] ResponseTime = new long[1000];
         public TimeSpan Interval;
         public readonly string[] ResponseMessage = new string[1000];

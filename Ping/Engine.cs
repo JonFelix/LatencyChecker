@@ -1,5 +1,5 @@
 ﻿using System;
-using System.ComponentModel;
+using System.ComponentModel;       
 
 namespace Ping
 {
@@ -51,8 +51,23 @@ namespace Ping
                 for(var i = 0; i < _host.Operations.Length; i++)
                 {
                     if(_host.Operations[i].LastOperationTime + _host.Operations[i].Interval < DateTime.Now)
-                    {
+                    {   
                         _host.Operations[i].Cursor++;
+                        if(_host.Operations[i].HostName == "")
+                        {
+                            try
+                            { 
+
+                                _host.Operations[i].HostName = System.Net.Dns.GetHostEntry(_host.Operations[i].Ip).HostName;
+                                _host.Operations[i].Ip = System.Net.Dns.GetHostEntry(_host.Operations[i].Ip).AddressList[0].ToString();
+                            }
+                            catch
+                            {
+                                Log("Host '" + _host.Operations[i].Ip + "' was not found. removing entry!");
+                                _host.RemoveOperationEntry(i);
+                                continue;
+                            }  
+                        }
                         if(_host.Operations[i].Cursor >= _host.Operations[i].ResponseTime.Length)
                         {
                             _host.Operations[i].Cursor--;

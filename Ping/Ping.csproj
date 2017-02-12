@@ -69,6 +69,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="MeasureModel.cs" />
+    <Compile Include="SettingsManager.cs" />
     <Compile Include="TrayIcon.cs" />
     <Compile Include="UserControlChart.xaml.cs">
       <DependentUpon>UserControlChart.xaml</DependentUpon>
@@ -129,8 +130,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Icon1.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Resource Include="icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
