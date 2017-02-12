@@ -10,12 +10,24 @@ namespace Ping
         WinForms.NotifyIcon _icon;
         MainWindow _host;
 
+        public string Text
+        {
+            get
+            {
+                return _icon.BalloonTipText;
+            }
+            set
+            {
+                _icon.Text = value;
+            }
+        }
+
         public TrayIcon(MainWindow host)
         {
             _host = host;
             _icon = new WinForms.NotifyIcon();
             _icon.Icon = new System.Drawing.Icon("icon.ico");
-            _icon.Visible = true;
+            _icon.Visible = true;       
            _icon.DoubleClick +=
                 delegate (object sender, EventArgs args)
                 {

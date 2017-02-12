@@ -17,6 +17,9 @@ namespace Ping
         public static readonly DependencyProperty PingListProperty = DependencyProperty.Register(
             "PingList", typeof(string), typeof(MainWindow), new PropertyMetadata(default(string)));
 
+        public static readonly DependencyProperty InfoWindowProperty = DependencyProperty.Register(
+            "InfoWindow", typeof(string), typeof(MainWindow), new PropertyMetadata(default(string)));
+
         public string PingList
         {   
             get {
@@ -26,6 +29,30 @@ namespace Ping
                 }
                 return Dispatcher.Invoke(() => (string)GetValue(PingListProperty)) ; }
             set { Dispatcher.BeginInvoke((Action)(()=>SetValue(PingListProperty, value))) ; }
+        }
+
+        public string InfoWindow
+        {
+            get
+            {
+                if(!_engine.IsRunning)
+                {
+                    return "";
+                }
+                return Dispatcher.Invoke(() => (string)GetValue(InfoWindowProperty));
+            }
+            set
+            {
+                Dispatcher.BeginInvoke((Action)(() => SetValue(InfoWindowProperty, value)));
+            }
+        }
+
+        public TrayIcon TrayIcon
+        {
+            get
+            {
+                return _icon;
+            }
         }
 
         public PingOperation[] Operations
@@ -90,6 +117,11 @@ namespace Ping
         public void Log(string text)
         {
             PingList += PingList!=null? Environment.NewLine + text :text;
+        }
+
+        public void UpdateInfo(string text)
+        {
+            InfoWindow = text;
         }
 
         private void ClickMenuPreferences(object sender, RoutedEventArgs e)
