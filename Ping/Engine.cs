@@ -63,7 +63,7 @@ namespace Ping
                         _host.Operations[i].ResponseMessage[_host.Operations[i].Cursor] = reply.Status.ToString();
                         _host.Operations[i].ResponseTime[_host.Operations[i].Cursor] = reply.RoundtripTime;
                         _host.Operations[i].ResponseTimestamp[_host.Operations[i].Cursor] = DateTime.Now;
-                        Chart(Convert.ToDouble(_host.Operations[i].ResponseTime[_host.Operations[i].Cursor]), i, lastTime);
+                        Chart(Convert.ToDouble(_host.Operations[i].ResponseTime[_host.Operations[i].Cursor]), i, _host.Operations[i].HostName, lastTime);
                     }
                 }
             }    
@@ -74,12 +74,12 @@ namespace Ping
             _host.Log(text);
         }
 
-        public void Chart(double value, int index, DateTime? date=null)
+        public void Chart(double value, int index, string title, DateTime? date=null)
         {
             if (_host.Chart.ChartValues==null||index >= _host.Chart.ChartValues.Count)
             {
                 //_host.Chart.ChartValues.Add(null);
-                _host.Chart.AddSerie(index);
+                _host.Chart.AddSerie(index, title);
             }
             _host.Chart.UpdateSerie(index, new MeasureModel() { Value = value == 0 ? double.NaN:value, Series = index, DateTime = date ?? DateTime.Now});
         }

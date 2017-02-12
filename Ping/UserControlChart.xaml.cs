@@ -105,14 +105,15 @@ namespace Ping
         public bool IsDataInjectionRunning { get; set; }
         public Random R { get; set; }
 
-        public void AddSerie(int index, object options = null)
+        public void AddSerie(int index, string title, object options = null)
         {
             Dispatcher.BeginInvoke((Action)(() =>
             {
                 ChartCartesianChart.Series.Add(new LineSeries()
                 {
                     Values = new ChartValues<MeasureModel>(),
-                    Fill = Brushes.Transparent
+                    Title = title
+                    //Fill = Brushes.Transparent
                 });
             }));
 
@@ -143,7 +144,7 @@ namespace Ping
                 ChartCartesianChart.Series[i].Values.AddRange(ChartValues[i]);
                 ChartValues[i].Clear();
 
-                if (ChartCartesianChart.Series[i].Values.Count > 50)
+                if (ChartCartesianChart.Series[i].Values.Count > 38)
                     ChartCartesianChart.Series[i].Values.RemoveAt(0);
             }       
 
@@ -151,8 +152,8 @@ namespace Ping
 
         private void SetAxisLimits(DateTime now)
         {
-            AxisMax = now.Ticks + TimeSpan.FromSeconds(0).Ticks; // lets force the axis to be 100ms ahead
-            AxisMin = now.Ticks - TimeSpan.FromMinutes(5).Ticks; //we only care about the last 8 seconds
+            AxisMax = now.Ticks + TimeSpan.FromSeconds(-5).Ticks; // lets force the axis to be 100ms ahead
+            AxisMin = now.Ticks - TimeSpan.FromMinutes(3).Ticks; //we only care about the last 8 seconds
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

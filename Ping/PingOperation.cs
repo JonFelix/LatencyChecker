@@ -11,11 +11,13 @@ namespace Ping
         public readonly DateTime[] ResponseTimestamp = new DateTime[1000];
         public DateTime LastOperationTime;
         public int Cursor = -1;
+        public string HostName = "";
 
-        public PingOperation(string ip, TimeSpan interval)
+        public PingOperation(string hostname, string ip, TimeSpan interval)
         {
             Ip = ip;
             Interval = interval;
+            HostName = hostname;
         }
 
         public void PushResponses()
