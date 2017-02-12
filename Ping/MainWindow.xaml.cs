@@ -23,11 +23,7 @@ namespace Ping
 
         public string PingList
         {   
-            get {
-                if(!_engine.IsRunning)
-                {
-                    return "";
-                }
+            get { 
                 return Dispatcher.Invoke(() => (string)GetValue(PingListProperty)) ; }
             set { Dispatcher.BeginInvoke((Action)(()=>SetValue(PingListProperty, value))) ; }
         }
@@ -70,7 +66,7 @@ namespace Ping
 
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();  
             _icon = new TrayIcon(this);
             _settings = new SettingsManager(this);
 

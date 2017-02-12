@@ -5,13 +5,13 @@ namespace Ping
 {
     public class SettingsManager
     {
-        readonly string _serverListFile = @"/serverlist";
+        readonly string _serverListFile = @"serverlist";
         MainWindow _host;
 
 
         public SettingsManager(MainWindow host)
         {
-            host = _host;
+            _host = host;
 
             if(!File.Exists(_serverListFile))
             {
@@ -24,7 +24,14 @@ namespace Ping
             {
                 _tmpList.Add(new PingOperation("", line, new System.TimeSpan(0, 0, 5)));
             }
-            _host.Operations = _tmpList.ToArray();
+            if(_tmpList.Count > 0)
+            {
+                _host.Operations = _tmpList.ToArray();
+            }
+            else
+            {
+                _host.Log("Serverlist is empty!");
+            }
         }
     }
 }

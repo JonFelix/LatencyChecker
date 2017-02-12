@@ -6,8 +6,12 @@
         xmlns:local="clr-namespace:Ping"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" Icon="Resources/Icon1.ico" Closing="WindowClosing">
+        Title="MainWindow" Height="350" Width="525" Icon="icon.ico" Closing="WindowClosing>
+
     <Grid>
+
+
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
@@ -26,9 +30,11 @@
         </Menu>
         <local:ConstantChangesChart x:Name="Chart" Grid.Row="1" Grid.ColumnSpan="2"/>
         <Separator Grid.Row="2" Grid.ColumnSpan="2" />
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True" Grid.Row="3">
+        <Grid>
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True" Grid.Row="3">
             <TextBox BorderBrush="transparent" Text="{Binding PingList, ElementName=Window}" Cursor="Arrow" TextWrapping="Wrap" />
         </ScrollViewer>
-        <TextBox BorderBrush="transparent" Text="{Binding InfoWindow, ElementName=Window}" Grid.Row="3" Grid.Column="1"  Cursor="Arrow" TextWrapping="Wrap" />
+            <TextBox BorderBrush="transparent" Text="{Binding InfoWindow, ElementName=Window}" Grid.Row="3" Grid.Column="1"  Cursor="Arrow" TextWrapping="Wrap" />
+        </Grid>
     </Grid>
 </Window>
