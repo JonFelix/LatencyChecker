@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;   
-using System.Windows;  
+using System.Windows;
+
 
 namespace Ping
 {
@@ -11,6 +12,7 @@ namespace Ping
     {
         private readonly List<PingOperation> _operations = new List<PingOperation>();
         private readonly Engine _engine;
+        private readonly TrayIcon _icon;
 
         public static readonly DependencyProperty PingListProperty = DependencyProperty.Register(
             "PingList", typeof(string), typeof(MainWindow), new PropertyMetadata(default(string)));
@@ -41,6 +43,9 @@ namespace Ping
         public MainWindow()
         {
             InitializeComponent();
+            _icon = new TrayIcon();
+            
+
             //Google
             _operations.Add(new PingOperation("Primary Google DNS", "8.8.8.8", new TimeSpan(0, 0, 5)));
             _operations.Add(new PingOperation("Secondary Google DNS", "8.8.4.4", new TimeSpan(0, 0, 5)));
@@ -73,7 +78,15 @@ namespace Ping
 
             
         }
-        
+
+        protected override void OnStateChanged(EventArgs e)
+        {
+            if(WindowState == WindowState.Minimized)
+                this.Hide();
+
+            base.OnStateChanged(e);
+        }
+
         public void Log(string text)
         {
             PingList += PingList!=null? Environment.NewLine + text :text;
