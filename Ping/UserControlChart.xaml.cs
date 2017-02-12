@@ -1,22 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using LiveCharts;
 using LiveCharts.Configurations;
-using LiveCharts.Definitions.Series;
 using LiveCharts.Wpf;
 
 namespace Ping
@@ -24,21 +14,21 @@ namespace Ping
     /// <summary>
     /// Interaction logic for UserControlChart.xaml
     /// </summary>
-    public partial class ConstantChangesChart : UserControl, INotifyPropertyChanged
+    public sealed partial class ConstantChangesChart : UserControl, INotifyPropertyChanged
     {
         private double _axisMax;
         private double _axisMin;
 
         public List<ChartValues<MeasureModel>> ChartValues
         {
-            get; set;
+            get;
         }
         public Func<double, string> DateTimeFormatter
         {
             get; set;
         }
 
-        public double AxisStep
+        private double AxisStep
         {
             get; set;
         }
@@ -167,10 +157,9 @@ namespace Ping
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged(string propertyName = null)
+        private void OnPropertyChanged(string propertyName = null)
         {
-            if (PropertyChanged != null)
-                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public void UpdateSerie(int index, MeasureModel measureModel)
