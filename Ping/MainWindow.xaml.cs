@@ -99,7 +99,7 @@ namespace Ping
 
         public void RemoveOperationEntry(int index)
         {
-            _operations.RemoveAt(index);
+            _operations[index] = null;
         }
 
         public void UpdateInfo(string text)

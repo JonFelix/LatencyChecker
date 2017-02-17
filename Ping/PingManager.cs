@@ -28,7 +28,7 @@ namespace Ping
             var buffer = Encoding.ASCII.GetBytes(data);
             const int timeout = 120;
             var reply = pingSender.Send(ip, timeout, buffer, options);
-            _host.Log("Pinging " + reply.Address + ": " + reply.Status + "("+ reply.RoundtripTime + "ms)");
+            _host.Log("Pinging " + ip + ": " + reply.Status + "("+ reply.RoundtripTime + "ms)");
              
             return reply;
         }

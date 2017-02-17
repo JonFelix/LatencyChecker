@@ -13,6 +13,7 @@ namespace Ping
         public int Cursor = -1;
         public string HostName = "";    
         public string OriginalHost = "";
+        public int ChartIndex = -1;
 
         public PingOperation(string hostname, string ip, TimeSpan interval)
         {

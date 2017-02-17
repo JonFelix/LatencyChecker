@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Ping
@@ -38,6 +39,7 @@ namespace Ping
                 _tmpList.Add(new PingOperation("", line, new System.TimeSpan(0, 0, 5)));
                 _serverListContent += line + System.Environment.NewLine;
             }
+            _sreader.Close();
             if(_tmpList.Count > 0)
             {
                 _host.Operations = _tmpList.ToArray();
@@ -46,6 +48,24 @@ namespace Ping
             {
                 _host.Log("Serverlist is empty!");
             }
+        }
+
+        public void WriteServerlist(string list)
+        {
+            if(!File.Exists(_serverListFile))
+            {
+                File.Create(_serverListFile);
+            }
+            File.WriteAllText(_serverListFile, String.Empty);
+            StreamWriter _swriter = new StreamWriter(_serverListFile);
+            string[] _tmpServerList = list.Split('\n');
+            _serverListContent = list;
+            for(int i = 0; i < _tmpServerList.Length; i++)
+            {
+                _tmpServerList[i].Replace("\t", "");
+                _swriter.WriteLine(_tmpServerList[i]);
+            }
+            _swriter.Close();
         }
     }
 }

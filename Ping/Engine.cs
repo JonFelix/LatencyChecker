@@ -8,6 +8,7 @@ namespace Ping
         private readonly MainWindow _host;
         private readonly BackgroundWorker _worker = new BackgroundWorker();
         private bool _isRunning = true;
+        private int _chartIndex = -1;
 
         public bool IsRunning
         {
@@ -50,9 +51,18 @@ namespace Ping
                 string _trayText = "";
                 for(var i = 0; i < _host.Operations.Length; i++)
                 {
+                    if(_host.Operations[i] == null)
+                    {
+                        continue;
+                    }
                     if(_host.Operations[i].LastOperationTime + _host.Operations[i].Interval < DateTime.Now)
                     {   
                         _host.Operations[i].Cursor++;
+                        if(_host.Operations[i].Ip == "")
+                        {
+                            _host.RemoveOperationEntry(i);
+                            continue;
+                        }
                         if(_host.Operations[i].HostName == "")
                         {
                             try
@@ -78,7 +88,10 @@ namespace Ping
                         _host.Operations[i].ResponseMessage[_host.Operations[i].Cursor] = reply.Status.ToString();
                         _host.Operations[i].ResponseTime[_host.Operations[i].Cursor] = reply.RoundtripTime;
                         _host.Operations[i].ResponseTimestamp[_host.Operations[i].Cursor] = DateTime.Now;
-                        Chart(Convert.ToDouble(_host.Operations[i].ResponseTime[_host.Operations[i].Cursor]), i, _host.Operations[i].HostName, lastTime);
+                        if(Chart(Convert.ToDouble(_host.Operations[i].ResponseTime[_host.Operations[i].Cursor]), _host.Operations[i].ChartIndex, _host.Operations[i].HostName, lastTime))
+                        {
+                            _host.Operations[i].ChartIndex = _chartIndex;
+                        }
                     }
                     _trayText += _host.Operations[i].HostName + " " + _host.Operations[i].ResponseTime[_host.Operations[i].Cursor].ToString() + "ms";
                     if(i < _host.Operations.Length)
@@ -96,14 +109,18 @@ namespace Ping
             _host.Log(text);
         }
 
-        public void Chart(double value, int index, string title, DateTime? date=null)
+        public bool Chart(double value, int index, string title, DateTime? date=null)
         {
-            if (_host.Chart.ChartValues==null||index >= _host.Chart.ChartValues.Count)
+            bool _return = false;
+            if (_host.Chart.ChartValues==null||index >= _host.Chart.ChartValues.Count || index == -1)
             {
-                //_host.Chart.ChartValues.Add(null);
-                _host.Chart.AddSerie(index, title);
+                _chartIndex++;
+                index = _chartIndex;
+                _host.Chart.AddSerie(_chartIndex, title);
+                _return = true;
             }
             _host.Chart.UpdateSerie(index, new MeasureModel() { Value = value == 0 ? double.NaN:value, Series = index, DateTime = date ?? DateTime.Now});
+            return _return;
         }
                               
     }    
