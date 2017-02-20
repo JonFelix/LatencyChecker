@@ -29,7 +29,7 @@ namespace Ping
 
             if(!File.Exists(_serverListFile))
             {
-                File.Create(_serverListFile);
+                (File.Create(_serverListFile)).Close();
             }
             StreamReader _sreader = new StreamReader(_serverListFile);
             string line = "";
@@ -54,7 +54,7 @@ namespace Ping
         {
             if(!File.Exists(_serverListFile))
             {
-                File.Create(_serverListFile);
+                (File.Create(_serverListFile)).Close();
             }
             File.WriteAllText(_serverListFile, String.Empty);
             StreamWriter _swriter = new StreamWriter(_serverListFile);
@@ -62,7 +62,7 @@ namespace Ping
             _serverListContent = list;
             for(int i = 0; i < _tmpServerList.Length; i++)
             {
-                _tmpServerList[i].Replace("\t", "");
+                //_tmpServerList[i] = _tmpServerList[i].Replace("\t", "").Replace("\r", "");
                 _swriter.WriteLine(_tmpServerList[i]);
             }
             _swriter.Close();
