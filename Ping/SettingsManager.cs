@@ -62,7 +62,7 @@ namespace Ping
             _serverListContent = list;
             for(int i = 0; i < _tmpServerList.Length; i++)
             {
-                //_tmpServerList[i] = _tmpServerList[i].Replace("\t", "").Replace("\r", "");
+                _tmpServerList[i] = _tmpServerList[i].Replace("\t", "").Replace("\r", "");
                 _swriter.WriteLine(_tmpServerList[i]);
             }
             _swriter.Close();

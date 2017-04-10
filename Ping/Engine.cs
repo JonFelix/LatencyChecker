@@ -85,6 +85,10 @@ namespace Ping
                         }
                         _host.Operations[i].LastOperationTime = DateTime.Now;
                         var reply = ping.SendPing(_host.Operations[i].Ip);
+                        if(reply.Status != System.Net.NetworkInformation.IPStatus.Success)
+                        {
+                            _host.Log(_host.Operations[i].HostName + " error: " + reply.Status.ToString());
+                        }
                         _host.Operations[i].ResponseMessage[_host.Operations[i].Cursor] = reply.Status.ToString();
                         _host.Operations[i].ResponseTime[_host.Operations[i].Cursor] = reply.RoundtripTime;
                         _host.Operations[i].ResponseTimestamp[_host.Operations[i].Cursor] = DateTime.Now;
@@ -96,6 +100,7 @@ namespace Ping
                         {
                             _host.Operations[i].ChartIndex = _chartIndex;
                         }
+                        
                     }
                     _trayText += _host.Operations[i].HostName + " (Cur:" + _host.Operations[i].ResponseTime[_host.Operations[i].Cursor].ToString() + "ms Max:" + _host.Operations[i].MaxPing + "ms)";
                     if(i < _host.Operations.Length)

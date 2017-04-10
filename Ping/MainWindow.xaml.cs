@@ -14,6 +14,7 @@ namespace Ping
         private readonly Engine _engine;
         private readonly TrayIcon _icon;
         private readonly SettingsManager _settings;
+        private readonly bool _logTimestamp = true;
 
         bool _userExit = false;
 
@@ -94,6 +95,11 @@ namespace Ping
 
         public void Log(string text)
         {
+            if(_logTimestamp)
+            {
+                string timestamp = "[" + DateTime.Now.Hour.ToString() + ":" + DateTime.Now.Minute.ToString() + ":" + DateTime.Now.Second.ToString() + "] ";
+                text = timestamp + text;
+            }
             PingList += PingList!=null? Environment.NewLine + text :text;
         }
 

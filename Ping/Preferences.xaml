@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ping"
         mc:Ignorable="d"
-        Title="Preferences" Height="300" Width="300" Closing="WindowClosing">
+        Title="Preferences" Height="586" Width="532" Closing="WindowClosing">
     <Grid>
         <TextBox x:Name="serverList" TextWrapping="Wrap" Text="" AcceptsReturn="True"/>
     </Grid>
