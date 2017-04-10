@@ -88,12 +88,16 @@ namespace Ping
                         _host.Operations[i].ResponseMessage[_host.Operations[i].Cursor] = reply.Status.ToString();
                         _host.Operations[i].ResponseTime[_host.Operations[i].Cursor] = reply.RoundtripTime;
                         _host.Operations[i].ResponseTimestamp[_host.Operations[i].Cursor] = DateTime.Now;
+                        if(_host.Operations[i].ResponseTime[_host.Operations[i].Cursor] > _host.Operations[i].MaxPing)
+                        {
+                            _host.Operations[i].MaxPing = _host.Operations[i].ResponseTime[_host.Operations[i].Cursor];
+                        }
                         if(Chart(Convert.ToDouble(_host.Operations[i].ResponseTime[_host.Operations[i].Cursor]), _host.Operations[i].ChartIndex, _host.Operations[i].HostName, lastTime))
                         {
                             _host.Operations[i].ChartIndex = _chartIndex;
                         }
                     }
-                    _trayText += _host.Operations[i].HostName + " " + _host.Operations[i].ResponseTime[_host.Operations[i].Cursor].ToString() + "ms";
+                    _trayText += _host.Operations[i].HostName + " (Cur:" + _host.Operations[i].ResponseTime[_host.Operations[i].Cursor].ToString() + "ms Max:" + _host.Operations[i].MaxPing + "ms)";
                     if(i < _host.Operations.Length)
                     {
                         _trayText += Environment.NewLine;

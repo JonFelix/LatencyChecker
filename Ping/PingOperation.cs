@@ -14,6 +14,7 @@ namespace Ping
         public string HostName = "";    
         public string OriginalHost = "";
         public int ChartIndex = -1;
+        public long MaxPing = 0;
 
         public PingOperation(string hostname, string ip, TimeSpan interval)
         {
@@ -26,7 +27,7 @@ namespace Ping
         public void PushResponses()
         {
             for(var i = 1; i < ResponseMessage.Length; i++)
-            {
+            {          
                 ResponseMessage[i - 1] = ResponseMessage[i];
                 ResponseTime[i - 1] = ResponseTime[i];
                 ResponseTimestamp[i - 1] = ResponseTimestamp[i];
