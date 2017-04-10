@@ -18,6 +18,8 @@ namespace Ping
 
         bool _userExit = false;
 
+        public readonly long PingLimit = 30;
+
         public static readonly DependencyProperty PingListProperty = DependencyProperty.Register(
             "PingList", typeof(string), typeof(MainWindow), new PropertyMetadata(default(string)));
 
