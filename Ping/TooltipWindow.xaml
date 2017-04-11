@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Height="300" Width="300" Deactivated="Window_Deactivated" ShowInTaskbar="False" ResizeMode="NoResize" Topmost="True" WindowStyle="None" WindowStartupLocation="Manual">
     <Grid>
-        
+        <Canvas HorizontalAlignment="Left" Height="300" VerticalAlignment="Top" Width="300" Name="Canvas"/>
+
     </Grid>
 </Window>
