@@ -13,15 +13,26 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace Ping
-{
-    /// <summary>
-    /// Interaction logic for TooltipWindow.xaml
-    /// </summary>
+{ 
     public partial class TooltipWindow : Window
     {
-        public TooltipWindow()
+        MainWindow _host;
+
+        int _buffer = 20;
+
+        public TooltipWindow(MainWindow host)
         {
+            _host = host;
+            System.Drawing.Rectangle resolution = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea;
+            
             InitializeComponent();
+            this.Left = resolution.Width - this.Width - _buffer;
+            this.Top = resolution.Height - this.Height - _buffer;
+        } 
+
+        private void Window_Deactivated(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ping"
         mc:Ignorable="d"
-        Title="TooltipWindow" Height="300" Width="300">
+        Height="300" Width="300" Deactivated="Window_Deactivated" ShowInTaskbar="False" ResizeMode="NoResize" Topmost="True" WindowStyle="None" WindowStartupLocation="Manual">
     <Grid>
         
     </Grid>

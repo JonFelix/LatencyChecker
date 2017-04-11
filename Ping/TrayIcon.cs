@@ -2,6 +2,7 @@
 using WinForms = System.Windows.Forms;
 using System.Drawing;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Ping
 {
@@ -28,7 +29,7 @@ namespace Ping
             _icon = new WinForms.NotifyIcon();
             _icon.Icon = new System.Drawing.Icon("icon.ico");
             _icon.Visible = true;       
-           _icon.DoubleClick +=
+            _icon.DoubleClick +=
                 delegate (object sender, EventArgs args)
                 {
                     if(_host.IsVisible)
@@ -43,6 +44,14 @@ namespace Ping
                     }
                     
                 };
+
+            _icon.Click += _icon_Click;
+        }
+
+        private void _icon_Click(object sender, EventArgs e)
+        {
+            TooltipWindow tooltip = new TooltipWindow(_host);
+            tooltip.Show();
         }
     }
 }
