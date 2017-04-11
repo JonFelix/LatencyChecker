@@ -87,14 +87,14 @@ namespace Ping
                         var reply = ping.SendPing(_host.Operations[i].Ip);
                         if(reply.Status != System.Net.NetworkInformation.IPStatus.Success)
                         {
-                            _host.Log(_host.Operations[i].HostName + " error: " + reply.Status.ToString());
+                            _host.Log(_host.Operations[i].HostName + ": " + reply.Status.ToString(), true);
                         }
                         _host.Operations[i].ResponseMessage[_host.Operations[i].Cursor] = reply.Status.ToString();
                         _host.Operations[i].ResponseTime[_host.Operations[i].Cursor] = reply.RoundtripTime;
                         _host.Operations[i].ResponseTimestamp[_host.Operations[i].Cursor] = DateTime.Now;
                         if(_host.Operations[i].ResponseTime[_host.Operations[i].Cursor] >= _host.PingLimit)
                         {
-                            _host.Log(_host.Operations[i].HostName + " has high ping! (" + reply.RoundtripTime + "ms)");           
+                            _host.Log(_host.Operations[i].HostName + " has high ping! (" + reply.RoundtripTime + "ms)", true);           
                         }
                         if(_host.Operations[i].ResponseTime[_host.Operations[i].Cursor] > _host.Operations[i].MaxPing)
                         {

@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;   
-using System.Windows;
+using System.Collections.Generic;
+using System.Windows;  
 
 
 namespace Ping
@@ -15,6 +15,7 @@ namespace Ping
         private readonly TrayIcon _icon;
         private readonly SettingsManager _settings;
         private readonly bool _logTimestamp = true;
+        private bool _isNotifyEnabled = true;
 
         bool _userExit = false;
 
@@ -95,8 +96,13 @@ namespace Ping
             base.OnStateChanged(e);
         }
 
-        public void Log(string text)
+        public void Log(string text, bool notify = false)
         {
+            if(_isNotifyEnabled && notify)
+                
+            {
+                
+            }
             if(_logTimestamp)
             {
                 string timestamp = "[" + DateTime.Now.Hour.ToString() + ":" + DateTime.Now.Minute.ToString() + ":" + DateTime.Now.Second.ToString() + "] ";
@@ -128,6 +134,11 @@ namespace Ping
             this.Close();
         }
 
+        private void ClickMenuToggleNotify(object sender, RoutedEventArgs e)
+        {
+            _isNotifyEnabled = ((System.Windows.Controls.MenuItem)sender).IsChecked;
+        }
+
         private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if(_userExit)
@@ -136,7 +147,6 @@ namespace Ping
             }
             e.Cancel = true;
             Hide();  
-        }
-
+        }    
     }
 }

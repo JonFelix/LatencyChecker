@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Ping"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="489.577" Width="958.535" Icon="icon.ico" Closing="WindowClosing">
+        Title="Latency Checker" Height="489.577" Width="958.535" Icon="icon.ico" Closing="WindowClosing">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -23,13 +23,14 @@
         <Menu x:Name="Menu" VerticalAlignment="Top" Grid.ColumnSpan="2">
             <MenuItem Header="File" Margin="0">
                 <MenuItem Header="Preferences" Width="100" Click="ClickMenuPreferences"/>
+                <MenuItem Header="Notify" Width="100" Click="ClickMenuToggleNotify" IsCheckable="True" IsChecked="True"/>
                 <MenuItem Header="Exit" Width="100" Click="ClickMenuExit"/>
             </MenuItem>
         </Menu>
         <local:ConstantChangesChart x:Name="Chart" Grid.Row="1" Grid.ColumnSpan="2"/>
         <Separator Grid.Row="2" Grid.ColumnSpan="2" />
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True" Grid.Row="3">
-            <TextBox BorderBrush="transparent" Text="{Binding PingList, ElementName=Window}" Cursor="Arrow" TextWrapping="Wrap" />
+            <TextBox BorderBrush="transparent" Text="{Binding PingList, ElementName=Window}" Cursor="Arrow" TextWrapping="Wrap" Name="LogBox" />
         </ScrollViewer>
         <TextBox BorderBrush="transparent" Text="{Binding InfoWindow, ElementName=Window}" Grid.Row="3" Grid.Column="1"  Cursor="Arrow" TextWrapping="Wrap" />
     </Grid>

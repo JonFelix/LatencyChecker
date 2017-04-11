@@ -112,8 +112,8 @@ namespace Ping
                 ChartCartesianChart.Series.Add(new LineSeries()
                 {
                     Values = new ChartValues<MeasureModel>(),
-                    Title = title,
-                    Fill = Brushes.Transparent
+                    Title = title/*,
+                    Fill = Brushes.Transparent*/
                 });
             }));
 
