@@ -30,8 +30,19 @@ namespace Ping
         {
             _host = host;
             System.Drawing.Rectangle resolution = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea;   
-            InitializeComponent();    
-            this.Height = (_host.Operations.Length * (_rectHeight + _rectBuffer)) + (_rectBuffer * 2);
+            InitializeComponent();
+            int length = 0;
+            for(int i = 0; i < _host.Operations.Length; i++)
+            {
+                if(_host.Operations[i] != null)
+                {
+                    if(_host.Operations[i].Cursor != -1)
+                    {
+                        length++;
+                    }
+                }    
+            }  
+            this.Height = (length * (_rectHeight + _rectBuffer)) + (_rectBuffer * 2);
             this.Left = resolution.Width - this.Width - _windowBuffer;
             this.Top = resolution.Height - this.Height - _windowBuffer;
             int ignored = 0;
@@ -77,7 +88,9 @@ namespace Ping
                 TextBlock textbox = new TextBlock();
                 textbox.Foreground = Brushes.BlueViolet;
                 textbox.FontSize = 18;
-                textbox.Text = _host.Operations[i].HostName + " " + pingValue + "ms";
+                string tmpName = _host.Operations[i].HostName == "" ? _host.Operations[i].OriginalHost : _host.Operations[i].HostName;
+                string name = tmpName.Length > 25 ? tmpName.Substring(0, 25) + "..." : tmpName;
+                textbox.Text = name + " " + pingValue + "ms";
                 Canvas.Children.Add(textbox);
                 Canvas.SetLeft(textbox, _rectBuffer);
                 Canvas.SetTop(textbox, _rectBuffer + ((i - ignored) * (_rectHeight + _rectBuffer)));
