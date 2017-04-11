@@ -70,6 +70,9 @@
     </ApplicationDefinition>
     <Compile Include="MeasureModel.cs" />
     <Compile Include="SettingsManager.cs" />
+    <Compile Include="TooltipWindow.xaml.cs">
+      <DependentUpon>TooltipWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TrayIcon.cs" />
     <Compile Include="UserControlChart.xaml.cs">
       <DependentUpon>UserControlChart.xaml</DependentUpon>
@@ -87,6 +90,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="TooltipWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControlChart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
