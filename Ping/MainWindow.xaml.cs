@@ -142,7 +142,7 @@ namespace Ping
         private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if(_userExit)
-            {
+            {   
                 return;
             }
             e.Cancel = true;
