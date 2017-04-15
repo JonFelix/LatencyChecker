@@ -54,7 +54,7 @@ namespace Ping
                     }
                 }
             }
-            this.Height = (length * (_rectHeight + _rectBuffer)) + (_rectBuffer * 2);
+            this.Height = (length * (_rectHeight + _rectBuffer)) + _rectBuffer;
             this.Left = resolution.Width - this.Width - _windowBuffer;
             this.Top = resolution.Height - this.Height - _windowBuffer;
             _uiUpdate = new Thread(new ThreadStart(UpdateUI));
@@ -165,7 +165,7 @@ namespace Ping
 
                         Canvas.Dispatcher.Invoke(
                             new AddTextBlockCallback(this.AddTextBlock),
-                            new object[] { name, _rectBuffer, _rectBuffer + ((i - ignored) * (_rectHeight + _rectBuffer)), 18, Brushes.BlueViolet }
+                            new object[] { name, _rectBuffer * 2, _rectBuffer + ((i - ignored) * (_rectHeight + _rectBuffer)), 18, Brushes.BlueViolet }
                             );
 
                         

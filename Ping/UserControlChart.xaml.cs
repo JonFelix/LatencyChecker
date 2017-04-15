@@ -152,7 +152,7 @@ namespace Ping
 
         private void SetAxisLimits(DateTime now)
         {
-            AxisMax = now.Ticks + TimeSpan.FromSeconds(0).Ticks; // lets force the axis to be 100ms ahead
+            AxisMax = now.Ticks + TimeSpan.FromSeconds(-3).Ticks; // lets force the axis to be 100ms ahead
             AxisMin = now.Ticks - TimeSpan.FromMinutes(3).Ticks; //we only care about the last 8 seconds
         }
 
